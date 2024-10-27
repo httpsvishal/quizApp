@@ -79,11 +79,7 @@ const startQuiz = (e) => {
     showQuestion();
 }
 
-
 landingForm.addEventListener("submit", startQuiz);
-
-
-
 
 let loadOptions = (index) => {
     optionsContainer.innerHTML = "";
@@ -93,7 +89,7 @@ let loadOptions = (index) => {
         removeListeners();
         const button = event.currentTarget;
         const icon = button.querySelector("img");
-        answered[index] = true;
+        answered[questionNo-1] = true;
 
         if (button.innerText === correctAnswer) {
             button.classList.add("correct");
@@ -159,15 +155,19 @@ let startTimer = () => {
 
 let showResult = () => {
     let correct = quizlength;
+    console.log(answered);
+    console.log(allSelectedOptns);
+    let j = 0 ;
     for (let i = 0; i < quizlength; i++) {
         let question = document.createElement("h2");
         question.innerText = `${i + 1}. ${allQuestion[allSelectedQues[i]].question}`;
         quizContent.append(question);
         if (answered[i] === true) {
-            quizContent.append(allSelectedOptns[i][0])
-            if (allSelectedOptns[i][0] != allSelectedOptns[i][1]) {
-                quizContent.append(allSelectedOptns[i][1]);
+            quizContent.append(allSelectedOptns[j][0])
+            if (allSelectedOptns[j][0] != allSelectedOptns[j][1]) {
+                quizContent.append(allSelectedOptns[j][1]);
                 correct--;
+                j++;
             }
         }
         else{
