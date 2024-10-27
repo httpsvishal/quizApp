@@ -28,19 +28,23 @@ let showAnsTime = 1000;
 let questionInterval = null;
 let allSelectedQues = [];
 let allSelectedOptns = [];
+let answered = [];
 
+for (let i = 0; i < quizlength; i++) {
+    answered.push(false);
+}
 
 const runApp = () => {
     timer.remove();
     progressbar.classList.add("small-screen");
     quizHeader.classList.add("home-screen");
-    quizContent.innerHTML="";
+    quizContent.innerHTML = "";
     quizContent.append(landingForm);
     quizFooter.remove();
     progressbar.style.width = "100%";
-    questionNo=1;
-    allSelectedOptns=[];
-    allSelectedQues=[]
+    questionNo = 1;
+    allSelectedOptns = [];
+    allSelectedQues = []
 }
 runApp();
 
@@ -72,8 +76,6 @@ const startQuiz = (e) => {
     level = document.getElementById("level").value;
     setLevel(level);
     removeHomeScreen();
-
-
     showQuestion();
 }
 
@@ -91,6 +93,7 @@ let loadOptions = (index) => {
         removeListeners();
         const button = event.currentTarget;
         const icon = button.querySelector("img");
+        answered[index] = true;
 
         if (button.innerText === correctAnswer) {
             button.classList.add("correct");
@@ -145,8 +148,8 @@ let startTimer = () => {
     if (questionInterval) clearInterval(questionInterval);
     let pWidth = 0;
     questionInterval = setInterval(() => {
-        remainingTime -= 10;
-        pWidth += (1000 / questionIntervalTime);
+        remainingTime -= 100;
+        pWidth += (10000 / questionIntervalTime);
         timeLeft.innerText = `${remainingTime / 1000} Secs`;
         progressbar.style.width = `${pWidth}%`;
         if (remainingTime <= 0)
@@ -158,12 +161,24 @@ let showResult = () => {
     let correct = quizlength;
     for (let i = 0; i < quizlength; i++) {
         let question = document.createElement("h2");
-        question.innerText = `${i+1}. ${allSelectedQues[i]}`;
+        question.innerText = `${i + 1}. ${allQuestion[allSelectedQues[i]].question}`;
         quizContent.append(question);
-        quizContent.append(allSelectedOptns[i][0])
-        if (allSelectedOptns[i][0] != allSelectedOptns[i][1]){
-            quizContent.append(allSelectedOptns[i][1]);
-            correct--;
+        if (answered[i] === true) {
+            quizContent.append(allSelectedOptns[i][0])
+            if (allSelectedOptns[i][0] != allSelectedOptns[i][1]) {
+                quizContent.append(allSelectedOptns[i][1]);
+                correct--;
+            }
+        }
+        else{
+            let answer = document.createElement("button");
+            let div = document.createElement("div");
+            div = allQuestion[allSelectedQues[i]].answer;
+            let img = document.createElement("img");
+            img.classList.add("correct-icon");
+            answer.append(div,img);
+            answer.classList.add("quiz-option","correct");
+            quizContent.append(answer);
         }
     }
     let result = document.createElement("h2");
@@ -172,7 +187,7 @@ let showResult = () => {
     let reset = document.createElement("button");
     reset.innerText = "Restart Quiz";
     reset.classList.add("reset");
-    reset.addEventListener("click",runApp);
+    reset.addEventListener("click", runApp);
     quizContent.append(reset);
     quizFooter.remove();
 }
@@ -199,7 +214,7 @@ let showQuestion = () => {
     question.textContent = allQuestion[currQIndex].question;
     questionheading.append(questionNumber, space, question);
     quizContent.append(questionheading);
-    allSelectedQues.push(allQuestion[currQIndex].question);
+    allSelectedQues.push(currQIndex);
     loadOptions(currQIndex);
     questionNo++;
     console.log(questionNo);
