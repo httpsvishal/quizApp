@@ -39,6 +39,8 @@ const runApp = () => {
     quizFooter.remove();
     progressbar.style.width = "100%";
     questionNo=1;
+    allSelectedOptns=[];
+    allSelectedQues=[]
 }
 runApp();
 
