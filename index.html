@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <main>
+        <div id="quiz-header">
+            <h1>Awesome Quiz App</h1>
+            <span id="timer">Time Left <span id="time-left">08</span></span>
+            <div id="progress-bar"></div>
+        </div>
+        <div id="quiz-content">
+            <!-- <h2 class="question"><span id="question-number">1</span>. <span id="question">What does HTML stands for?</span></h2>
+            <div id="all-options">
+                <button class="quiz-option">
+                    <div>Hyper Text Preprocessor</div>
+                    <img src="./assets/correct-icon.svg" class="correct-icon" alt="">
+                    <img src="./assets/incorrect-icon.svg" class="incorrect-icon" alt="">
+                </button>
+                <button class="quiz-option correct">
+                    <div>Hyper Text Markup Language</div>
+                    <img src="./assets/correct-icon.svg" class="correct-icon" alt="">
+                    <img src="./assets/incorrect-icon.svg" class="incorrect-icon" alt="">
+                </button>
+                <button class="quiz-option incorrect">
+                    <div>Lorem ipsum dolor sit.</div>
+                    <img src="./assets/correct-icon.svg" class="correct-icon" alt="">
+                    <img src="./assets/incorrect-icon.svg" class="incorrect-icon" alt="">
+                </button>
+                <button class="quiz-option">
+                    <div>Lorem ipsum dolor sit.</div>
+                    <img src="./assets/correct-icon.svg" class="correct-icon" alt="">
+                    <img src="./assets/incorrect-icon.svg" class="incorrect-icon" alt="">
+                </button>
+            </div> -->
+            <form id="quiz-home">
+                <h2>Challenge yourself with the ultimate quiz on internet basics and web development skills!</h2>
+                <select name="level" id="level" required>
+                    <option value="" disabled selected>Select the Level</option>
+                    <option value="beg">Beginner</option>
+                    <option value="medium">Intermediate</option>
+                    <option value="adv">Advanced</option>
+                    <option value="exp">Expert</option>
+                </select>
+                <button id="start-button"><img src="./assets/play-button.svg" alt=""></button>
+            </form>
+        </div>
+        <div id="quiz-footer">
+            <p><span id="curr-ques">1</span> of <span id="tot-ques">5</span> Questions</p>
+        </div>
+    </main>
+
+    <script src="./script.js" type="module"></script>
+</body>
+
+</html>
