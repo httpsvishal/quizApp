@@ -38,6 +38,7 @@ const runApp = () => {
     quizContent.append(landingForm);
     quizFooter.remove();
     progressbar.style.width = "100%";
+    questionNo=1;
 }
 runApp();
 
